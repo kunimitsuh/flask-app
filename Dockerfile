@@ -15,3 +15,7 @@ WORKDIR /usr/src/app
 
 # copy project
 COPY ./app .
+
+ENV PORT 8080
+
+CMD ["gunicorn", "run:app", "--config=config.py"]

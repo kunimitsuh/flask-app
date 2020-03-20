@@ -23,3 +23,21 @@ hostname削除はこちらの[issue](https://github.com/GoogleCloudPlatform/dock
 ```
 
 GCPコンソールのContainer Registryで確認
+
+
+## Cloud SQLの設定 [mysql doc](https://cloud.google.com/sql/docs/mysql/create-manage-users?hl=ja)[postgres doc](https://cloud.google.com/sql/docs/postgres/create-manage-users?hl=ja)
+default user(postgres)のパスワード設定
+```console
+gcloud sql users set-password postgres \
+  --instance=[INSTANCE_NAME] --prompt-for-password
+```
+新規ユーザー作成
+```console
+gcloud sql users create [USER_NAME] \
+  --instance=[INSTANCE_NAME] --password=[PASSWORD]
+```
+ユーザーパスワード変更
+```console
+gcloud sql users set-password [USER_NAME] \
+  --instance=[INSTANCE_NAME] --prompt-for-password
+```
