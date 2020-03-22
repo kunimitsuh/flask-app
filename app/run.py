@@ -1,13 +1,25 @@
-from flask import Flask
+from flask import Flask, request, Response
+from flask_cors import CORS
+import requests
 
 import config
 
 app = Flask(__name__)
+CORS(app)
+
+URL = "https://api.yelp.com/v3/businesses/search"
+headers = {'Authorization': f"Bearer {config.API_KEY}"}
 
 
 @app.route('/')
-def hello_world():
-    return "hello world"
+def ramen_yelp():
+    payload = {
+        "term": request.args.get("term", "ramen"),
+        "location": request.args.get("location", "ny")
+    }
+    response = requests.request("GET", URL, headers=headers, params=payload)
+
+    return response.json()
 
 
 if __name__ == "__main__":
